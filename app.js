@@ -1,4 +1,5 @@
-const CLIENT_ID = '255597916992-ghod19eihjd7s980tot66656ssqqd9q1.apps.googleusercontent.com';
+const CLIENT_ID = '255597916992-4ra5iqh710g4dparf4m7ob7a30onk6i4.apps.googleusercontent.com';
+const CLIENT_SECRET = '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'; // Novo Client Secret
 const REDIRECT_URI = 'https://pgama31.github.io/oauth2callback';
 const SCOPE = 'https://www.googleapis.com/auth/calendar https://www.googleapis.com/auth/spreadsheets';
 
