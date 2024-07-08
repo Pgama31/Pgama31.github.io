@@ -77,3 +77,4 @@ if (loginButton) {
         window.location.href = authUrl;
     };
 }
+
