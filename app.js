@@ -57,9 +57,6 @@ function handleAuthResponse(authResponse) {
     createCalendarEvent(authToken, eventDetails);
 }
 
-// Código existente que você já possui
-// Adicione aqui o restante do código que já estava funcionando, sem removê-lo
-
 // Certifique-se de que o botão de login tenha o ID correto
 document.addEventListener('DOMContentLoaded', function() {
     const loginButton = document.createElement('button');
@@ -69,7 +66,4 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Adicione event listener ao botão de login
     loginButton.onclick = () => {
-        const authUrl = `https://accounts.google.com/o/oauth2/v2/auth?response_type=code&client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&scope=${SCOPE}&access_type=offline`;
-        window.location.href = authUrl;
-    };
-});
+        const authUrl = `https://accounts.google.com/o/oauth2/v2/auth?response_type=code&client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&scope=${SCOPE}&
