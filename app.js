@@ -43,49 +43,7 @@ const eventDetails = {
     location: 'Sala de Laboratório 1',
     description: 'Sessão prática de laboratório',
     startDateTime: '2024-07-10T10:00:00',
-    endDateTime: '2024-07-10T12:00:00',
-};
+    endDateTime: '202
 
-// Função de callback para processar o token de acesso e criar o evento
-function handleAuthResponse(authResponse) {
-    const authToken = authResponse.access_token;
-    createCalendarEvent(authToken, eventDetails);
-}
-
-// Certifique-se de que o botão de login tenha o ID correto
-document.addEventListener('DOMContentLoaded', function() {
-    const loginButton = document.getElementById('login-button');
-    loginButton.onclick = () => {
-        const authUrl = `https://accounts.google.com/o/oauth2/v2/auth?response_type=code&client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&scope=${SCOPE}&access_type=offline`;
-        window.location.href = authUrl;
-    };
-
-    // Verifique se o usuário foi redirecionado de volta com um código de autorização
-    const urlParams = new URLSearchParams(window.location.search);
-    const code = urlParams.get('code');
-    if (code) {
-        // Trocar o código de autorização por um token de acesso
-        fetch('https://oauth2.googleapis.com/token', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-            },
-            body: new URLSearchParams({
-                code: code,
-                client_id: CLIENT_ID,
-                client_secret: CLIENT_SECRET,
-                redirect_uri: REDIRECT_URI,
-                grant_type: 'authorization_code',
-            }),
-        })
-        .then(response => response.json())
-        .then(data => {
-            handleAuthResponse(data);
-        })
-        .catch(error => {
-            console.error('Error exchanging code for token:', error);
-        });
-    }
-});
 
 
