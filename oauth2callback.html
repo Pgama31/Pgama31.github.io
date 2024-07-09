@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OAuth2 Callback</title>
+</head>
+<body>
+    <h1>Processando Autenticação...</h1>
+    <script>
+        // Extrair o código de autorização da URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const code = urlParams.get('code');
+
+        if (code) {
+            // Trocar o código de autorização por um token de acesso
+            fetch('https://oauth2.googleapis.com/token', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: new URLSearchParams({
+                    code: code,
+                    client_id: '255597916992-4ra5iqh710g4dparf4m7ob7a30onk6i4.apps.googleusercontent.com',
+                    client_secret: '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',
+                    redirect_uri: 'https://pgama31.github.io/oauth2callback',
+                    grant_type: 'authorization_code',
+                }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.access_token) {
+                    // Armazenar o token de acesso em localStorage
+                    localStorage.setItem('authToken', data.access_token);
+                    // Redirecionar para a página principal ou qualquer outra página
+                    window.location.href = 'index.html';
+                } else {
+                    console.error('Erro ao obter o token de acesso:', data);
+                }
+            })
+            .catch(error => {
+                console.error('Erro ao trocar o código pelo token:', error);
+            });
+        } else {
+            console.error('Código de autorização não encontrado na URL.');
+        }
+    </script>
+</body>
+</html>
