@@ -1,6 +1,6 @@
 // Definição das constantes OAuth
 const CLIENT_ID = '255597916992-4ra5iqh710g4dparf4m7ob7a30onk6i4.apps.googleusercontent.com';
-const CLIENT_SECRET = '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'; // Novo Client Secret
+const CLIENT_SECRET = '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';
 const REDIRECT_URI = 'https://pgama31.github.io/oauth2callback';
 const SCOPE = 'https://www.googleapis.com/auth/calendar https://www.googleapis.com/auth/spreadsheets';
 
@@ -55,12 +55,10 @@ function handleAuthResponse(authResponse) {
 // Certifique-se de que o botão de login tenha o ID correto
 document.addEventListener('DOMContentLoaded', function() {
     const loginButton = document.getElementById('login-button');
-    if (loginButton) {
-        loginButton.onclick = () => {
-            const authUrl = `https://accounts.google.com/o/oauth2/v2/auth?response_type=code&client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&scope=${SCOPE}&access_type=offline`;
-            window.location.href = authUrl;
-        };
-    }
+    loginButton.onclick = () => {
+        const authUrl = `https://accounts.google.com/o/oauth2/v2/auth?response_type=code&client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&scope=${SCOPE}&access_type=offline`;
+        window.location.href = authUrl;
+    };
 
     // Verifique se o usuário foi redirecionado de volta com um código de autorização
     const urlParams = new URLSearchParams(window.location.search);
@@ -90,6 +88,22 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
+// Adiciona o botão de login dinamicamente caso não exista
+document.addEventListener('DOMContentLoaded', function() {
+    if (!document.getElementById('login-button')) {
+        const loginButton = document.createElement('button');
+        loginButton.id = 'login-button';
+        loginButton.innerText = 'Login com Google';
+        document.body.appendChild(loginButton);
+
+        // Adicione event listener ao botão de login
+        loginButton.onclick = () => {
+            const authUrl = `https://accounts.google.com/o/oauth2/v2/auth?response_type=code&client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&scope=${SCOPE}&access_type=offline`;
+            window.location.href = authUrl;
+        };
+    }
+});
+
 // Função para iniciar o login com Google (caso não esteja dentro do DOMContentLoaded)
 const loginButton = document.getElementById('login-button');
 if (loginButton) {
@@ -98,4 +112,3 @@ if (loginButton) {
         window.location.href = authUrl;
     };
 }
-
