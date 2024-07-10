@@ -55,10 +55,12 @@ function handleAuthResponse(authResponse) {
 // Certifique-se de que o botão de login tenha o ID correto
 document.addEventListener('DOMContentLoaded', function() {
     const loginButton = document.getElementById('login-button');
-    loginButton.onclick = () => {
-        const authUrl = `https://accounts.google.com/o/oauth2/v2/auth?response_type=code&client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&scope=${SCOPE}&access_type=offline`;
-        window.location.href = authUrl;
-    };
+    if (loginButton) {
+        loginButton.onclick = () => {
+            const authUrl = `https://accounts.google.com/o/oauth2/v2/auth?response_type=code&client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&scope=${SCOPE}&access_type=offline`;
+            window.location.href = authUrl;
+        };
+    }
 
     // Verifique se o usuário foi redirecionado de volta com um código de autorização
     const urlParams = new URLSearchParams(window.location.search);
@@ -88,22 +90,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
-// Adiciona o botão de login dinamicamente caso não exista
-document.addEventListener('DOMContentLoaded', function() {
-    if (!document.getElementById('login-button')) {
-        const loginButton = document.createElement('button');
-        loginButton.id = 'login-button';
-        loginButton.innerText = 'Login com Google';
-        document.body.appendChild(loginButton);
-
-        // Adicione event listener ao botão de login
-        loginButton.onclick = () => {
-            const authUrl = `https://accounts.google.com/o/oauth2/v2/auth?response_type=code&client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&scope=${SCOPE}&access_type=offline`;
-            window.location.href = authUrl;
-        };
-    }
-});
-
 // Função para iniciar o login com Google (caso não esteja dentro do DOMContentLoaded)
 const loginButton = document.getElementById('login-button');
 if (loginButton) {
@@ -112,3 +98,4 @@ if (loginButton) {
         window.location.href = authUrl;
     };
 }
+
