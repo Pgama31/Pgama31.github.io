@@ -11,7 +11,7 @@
         function exchangeCodeForToken(code) {
             const CLIENT_ID = '255597916992-4ra5iqh710g4dparf4m7ob7a30onk6i4.apps.googleusercontent.com';
             const CLIENT_SECRET = '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';
-            const REDIRECT_URI = 'https://pgama31.github.io/oauth2callback'; // Substitua pelo seu URL de redirecionamento
+            const REDIRECT_URI = 'https://pgama31.github.io/oauth2callback.html'; // Certifique-se de incluir .html
 
             fetch('https://oauth2.googleapis.com/token', {
                 method: 'POST',
@@ -30,7 +30,7 @@
             .then(data => {
                 console.log('Token de acesso recebido:', data);
 
-                // Armazenar o token de acesso onde necessário (localStorage, sessionStorage, etc.)
+                // Armazenar o token de acesso no sessionStorage
                 sessionStorage.setItem('access_token', data.access_token);
 
                 // Redirecionar para a página principal do aplicativo ou outra página desejada
