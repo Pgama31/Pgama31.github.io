@@ -1,18 +1,54 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>OAuth2 Callback</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Callback de Login</title>
 </head>
 <body>
     <script>
-        // Verificar se o código de autorização está presente na URL
+        // Função para trocar o código de autorização por um token de acesso
+        function exchangeCodeForToken(code) {
+            const CLIENT_ID = '255597916992-4ra5iqh710g4dparf4m7ob7a30onk6i4.apps.googleusercontent.com';
+            const CLIENT_SECRET = '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';
+            const REDIRECT_URI = 'https://pgama31.github.io/oauth2callback'; // Substitua pelo seu URL de redirecionamento
+
+            fetch('https://oauth2.googleapis.com/token', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: new URLSearchParams({
+                    code: code,
+                    client_id: CLIENT_ID,
+                    client_secret: CLIENT_SECRET,
+                    redirect_uri: REDIRECT_URI,
+                    grant_type: 'authorization_code',
+                }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Token de acesso recebido:', data);
+
+                // Armazenar o token de acesso onde necessário (localStorage, sessionStorage, etc.)
+                sessionStorage.setItem('access_token', data.access_token);
+
+                // Redirecionar para a página principal do aplicativo ou outra página desejada
+                window.location.href = 'https://pgama31.github.io/home'; // Substitua pela sua URL de página principal
+            })
+            .catch(error => {
+                console.error('Erro ao trocar o código pelo token:', error);
+            });
+        }
+
+        // Obter o código de autorização da URL de retorno
         const urlParams = new URLSearchParams(window.location.search);
         const code = urlParams.get('code');
+
         if (code) {
-            // Redirecionar de volta para a página inicial com o código de autorização
-            window.location.href = `index.html?code=${code}`;
+            exchangeCodeForToken(code);
         } else {
-            console.error('Authorization code not found');
+            console.error('Código de autorização não encontrado na URL.');
         }
     </script>
 </body>
