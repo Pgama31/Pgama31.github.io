@@ -53,15 +53,15 @@ function createCalendarEvent(authToken) {
         location: 'Sala de aula',
         description: 'Sessão prática para alunos',
         start: {
-            dateTime: '2024-07-21T10:00:00',
+            dateTime: '2024-07-21T10:00:00+01:00',
             timeZone: 'Europe/Lisbon'
         },
         end: {
-            dateTime: '2024-07-21T12:00:00',
+            dateTime: '2024-07-21T12:00:00+01:00',
             timeZone: 'Europe/Lisbon'
         },
         recurrence: ['RRULE:FREQ=DAILY;COUNT=2'],
-        attendees: [{email: 'email-do-participante-1@example.com'}, {email: 'email-do-participante-2@example.com'}],
+        attendees: [{email: 'lpage@example.com'}, {email: 'sbrin@example.com'}],
         reminders: {
             useDefault: false,
             overrides: [
