@@ -3,34 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LabScheduler - Login</title>
+    <title>LabScheduler</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+        }
+        button, a {
+            display: block;
+            margin: 10px auto;
+            padding: 10px 20px;
+            text-decoration: none;
+            background-color: #4285F4;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        a {
+            background-color: #34A853;
+        }
+    </style>
 </head>
 <body>
-    <h1>Bem-vindo ao LabScheduler</h1>
-    <p>Aplicação criada para os alunos se registarem para as sessões de Laboratório, efetuarem o registo dos dados. Todos os dados ficam registados remotamente com possibilidade de acesso a alunos/técnico/docentes.</p>
-    <button id="login-button">Login com Google</button>
-
-    <script>
-        // Função para redirecionar para a URL de autorização do Google OAuth
-        function redirectToGoogleAuth() {
-            const CLIENT_ID = '255597916992-4ra5iqh710g4dparf4m7ob7a30onk6i4.apps.googleusercontent.com';
-            const REDIRECT_URI = 'https://pgama31.github.io/oauth2callback.html'; // Certifique-se de incluir .html
-
-            // Escopos de acesso necessários para Google Calendar e Google Sheets
-            const SCOPE = 'https://www.googleapis.com/auth/calendar https://www.googleapis.com/auth/spreadsheets';
-
-            // URL de autorização do Google
-            const authUrl = `https://accounts.google.com/o/oauth2/v2/auth?response_type=code&client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&scope=${SCOPE}&access_type=offline`;
-
-            // Redirecionar para a página de autorização do Google
-            window.location.href = authUrl;
-        }
-
-        // Adiciona um ouvinte de evento ao botão de login
-        document.getElementById('login-button').addEventListener('click', redirectToGoogleAuth);
-    </script>
+    <div class="container">
+        <h1>Bem-vindo ao LabScheduler</h1>
+        <p>Aplicação criada para os alunos se registarem para as sessões de Laboratório, efetuarem o registo dos dados. Todos os dados ficam registados remotamente com possibilidade de acesso a alunos/técnico/docentes.</p>
+        <button id="login-button">Login com Google</button>
+        <a href="privacidade.html">Política de Privacidade</a>
+        <a href="termos.html">Termos de Serviço</a>
+    </div>
+    <script src="app.js"></script>
 </body>
 </html>
-<a href="privacy-policy.html">Política de Privacidade</a>
-<a href="terms-of-service.html">Termos de Serviço</a>
-
