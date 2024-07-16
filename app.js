@@ -1,7 +1,7 @@
 // Definição das constantes OAuth
 const CLIENT_ID = '255597916992-4ra5iqh710g4dparf4m7ob7a30onk6i4.apps.googleusercontent.com';
 const CLIENT_SECRET = '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';
-const REDIRECT_URI = 'https://pgama31.github.io/oauth2callback';
+const REDIRECT_URI = 'https://pgama31.github.io/oauth2callback.html'; // Certifique-se de incluir .html
 const SCOPE = 'https://www.googleapis.com/auth/calendar https://www.googleapis.com/auth/spreadsheets';
 
 // Função de redirecionamento para a URL de autenticação do Google
@@ -14,6 +14,7 @@ function redirectToGoogleAuth() {
 function handleAuthResponse(authResponse) {
     const authToken = authResponse.access_token;
     // Adicione a lógica para usar o authToken aqui, como criar um evento no calendário
+    console.log('Token de acesso:', authToken);
 }
 
 // Função para trocar o código de autorização por um token de acesso
@@ -91,7 +92,9 @@ function createCalendarEvent(authToken) {
 // Função de inicialização
 function initializeApp() {
     const loginButton = document.getElementById('login-button');
-    loginButton.onclick = redirectToGoogleAuth;
+    if (loginButton) {
+        loginButton.onclick = redirectToGoogleAuth;
+    }
 
     const urlParams = new URLSearchParams(window.location.search);
     const code = urlParams.get('code');
