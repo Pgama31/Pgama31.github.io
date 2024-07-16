@@ -38,6 +38,17 @@
         <a href="privacidade.html">Política de Privacidade</a>
         <a href="termos.html">Termos de Serviço</a>
     </div>
-    <script src="app.js"></script>
-</body>
-</html>
+    <script>
+        // Definição das constantes OAuth
+        const CLIENT_ID = '255597916992-4ra5iqh710g4dparf4m7ob7a30onk6i4.apps.googleusercontent.com';
+        const REDIRECT_URI = 'https://pgama31.github.io/oauth2callback.html';
+        const SCOPE = 'https://www.googleapis.com/auth/calendar https://www.googleapis.com/auth/spreadsheets';
+
+        // Função de redirecionamento para a URL de autenticação do Google
+        function redirectToGoogleAuth() {
+            const authUrl = `https://accounts.google.com/o/oauth2/v2/auth?response_type=code&client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&scope=${SCOPE}&access_type=offline`;
+            window.location.href = authUrl;
+        }
+
+        // Inicializa a aplicação quando o DOM estiver carregado
+        document.addEventListener('DOMContentLoaded', () =>
