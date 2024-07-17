@@ -51,4 +51,13 @@
         }
 
         // Inicializa a aplicação quando o DOM estiver carregado
-        document.addEventListener('DOMContentLoaded', () =>
+        document.addEventListener('DOMContentLoaded', () => {
+            const loginButton = document.getElementById('login-button');
+            if (loginButton) {
+                loginButton.addEventListener('click', redirectToGoogleAuth);
+            }
+        });
+    </script>
+</body>
+</html>
+
