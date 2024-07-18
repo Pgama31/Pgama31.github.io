@@ -6,7 +6,7 @@ const SCOPE = 'https://www.googleapis.com/auth/calendar https://www.googleapis.c
 
 // Função de redirecionamento para a URL de autenticação do Google
 function redirectToGoogleAuth() {
-    const authUrl = `https://accounts.google.com/o/oauth2/v2/auth?response_type=code&client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&scope=${SCOPE}&access_type=offline`;
+    const authUrl = `https://accounts.google.com/o/oauth2/auth?client_id=${CLIENT_ID}&redirect_uri=${encodeURIComponent(REDIRECT_URI)}&scope=${encodeURIComponent(SCOPE)}&response_type=code&access_type=offline&approval_prompt=force`;
     window.location.href = authUrl;
 }
 
