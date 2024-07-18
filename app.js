@@ -105,3 +105,4 @@ function initializeApp() {
 
 // Inicializa a aplicação quando o DOM estiver carregado
 document.addEventListener('DOMContentLoaded', initializeApp);
+
