@@ -15,22 +15,12 @@ function redirectToGoogleAuth() {
     window.location.href = authUrl;
 }
 
-// Inicializa a aplicação quando o DOM estiver carregado
-function initializeApp() {
-    const loginButton = document.getElementById('login-button');
-    if (loginButton) {
-        loginButton.onclick = redirectToGoogleAuth;
-    }
-}
-
-document.addEventListener('DOMContentLoaded', initializeApp);
-
-
 // Função para lidar com a resposta de autenticação
 function handleAuthResponse(authResponse) {
     const authToken = authResponse.access_token;
     // Adicione a lógica para usar o authToken aqui, como criar um evento no calendário
     console.log('Token de acesso:', authToken);
+    createCalendarEvent(authToken);
 }
 
 // Função para trocar o código de autorização por um token de acesso
@@ -118,3 +108,6 @@ function initializeApp() {
         exchangeCodeForToken(code);
     }
 }
+
+document.addEventListener('DOMContentLoaded', initializeApp);
+
