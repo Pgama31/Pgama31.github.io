@@ -6,9 +6,25 @@ const SCOPE = 'https://www.googleapis.com/auth/calendar https://www.googleapis.c
 
 // Função de redirecionamento para a URL de autenticação do Google
 function redirectToGoogleAuth() {
-    const authUrl = `https://accounts.google.com/o/oauth2/auth?client_id=${CLIENT_ID}&redirect_uri=${encodeURIComponent(REDIRECT_URI)}&scope=${encodeURIComponent(SCOPE)}&response_type=code&access_type=offline&approval_prompt=force`;
+    const encodedClientId = encodeURIComponent(CLIENT_ID);
+    const encodedRedirectUri = encodeURIComponent(REDIRECT_URI);
+    const encodedScope = encodeURIComponent(SCOPE);
+
+    const authUrl = `https://accounts.google.com/o/oauth2/auth?client_id=${encodedClientId}&redirect_uri=${encodedRedirectUri}&scope=${encodedScope}&response_type=code&access_type=offline&approval_prompt=force`;
+
     window.location.href = authUrl;
 }
+
+// Inicializa a aplicação quando o DOM estiver carregado
+function initializeApp() {
+    const loginButton = document.getElementById('login-button');
+    if (loginButton) {
+        loginButton.onclick = redirectToGoogleAuth;
+    }
+}
+
+document.addEventListener('DOMContentLoaded', initializeApp);
+
 
 // Função para lidar com a resposta de autenticação
 function handleAuthResponse(authResponse) {
@@ -102,7 +118,3 @@ function initializeApp() {
         exchangeCodeForToken(code);
     }
 }
-
-// Inicializa a aplicação quando o DOM estiver carregado
-document.addEventListener('DOMContentLoaded', initializeApp);
-
