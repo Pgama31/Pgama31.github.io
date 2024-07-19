@@ -6,9 +6,8 @@
     <title>Callback de Login</title>
 </head>
 <body>
-    <h1>Callback de Login</h1>
-    <button onclick="window.location.href='index.html';">Voltar para a página inicial</button>
     <script>
+        // Função para trocar o código de autorização por um token de acesso
         function exchangeCodeForToken(code) {
             const CLIENT_ID = '255597916992-4ra5iqh710g4dparf4m7ob7a30onk6i4.apps.googleusercontent.com';
             const CLIENT_SECRET = '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';
@@ -27,30 +26,26 @@
                     grant_type: 'authorization_code',
                 }),
             })
-            .then(response => {
-                console.log('Resposta da troca do token:', response);
-                return response.json();
-            })
+            .then(response => response.json())
             .then(data => {
                 console.log('Dados recebidos:', data);
 
+                // Armazenar o token de acesso no sessionStorage
                 if (data.access_token) {
                     sessionStorage.setItem('access_token', data.access_token);
-                    // Apenas para depuração
-                    document.body.innerHTML += `<p>Token de acesso: ${data.access_token}</p>`;
-                    // Redireciona para a página principal
-                    setTimeout(() => {
-                        window.location.href = 'index.html'; // Substitua pela URL de sua página principal
-                    }, 3000); // Aguarda 3 segundos para você poder ver o token
                 } else {
-                    console.error('Erro: Nenhum token de acesso recebido.', data);
+                    console.error('Erro: Nenhum token de acesso recebido.');
                 }
+
+                // Redirecionar para a página principal do aplicativo ou outra página desejada
+                window.location.href = 'https://pgama31.github.io/index.html'; // Substitua pela sua URL de página principal
             })
             .catch(error => {
                 console.error('Erro ao trocar o código pelo token:', error);
             });
         }
 
+        // Obter o código de autorização da URL de retorno
         const urlParams = new URLSearchParams(window.location.search);
         const code = urlParams.get('code');
 
@@ -63,5 +58,3 @@
     </script>
 </body>
 </html>
-
-
