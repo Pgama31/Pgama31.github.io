@@ -59,3 +59,26 @@
 </body>
 </html>
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LabScheduler - Página Inicial</title>
+</head>
+<body>
+    <h1>Bem-vindo ao LabScheduler</h1>
+    <p>Esta é a página inicial.</p>
+    <script>
+        console.log('Página inicial carregada.');
+
+        // Verificar se o token de acesso está presente no sessionStorage
+        const accessToken = sessionStorage.getItem('access_token');
+        if (accessToken) {
+            console.log('Token de acesso encontrado:', accessToken);
+        } else {
+            console.error('Nenhum token de acesso encontrado.');
+        }
+    </script>
+</body>
+</html>
