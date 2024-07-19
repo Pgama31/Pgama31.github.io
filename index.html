@@ -3,16 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LabScheduler</title>
+    <title>LabScheduler - Página Inicial</title>
     <style>
         body {
             font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
         }
         .container {
             max-width: 800px;
             margin: 0 auto;
             padding: 20px;
-            text-align: center;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #333;
         }
         button, a {
             display: block;
@@ -33,52 +41,45 @@
 <body>
     <div class="container">
         <h1>Bem-vindo ao LabScheduler</h1>
-        <p>Aplicação criada para os alunos se registarem para as sessões de Laboratório, efetuarem o registo dos dados. Todos os dados ficam registados remotamente com possibilidade de acesso a alunos/técnico/docentes.</p>
+        <p>Esta é a página inicial. Você pode usar este espaço para apresentar informações adicionais ou funcionalidades do aplicativo.</p>
         <button id="login-button">Login com Google</button>
         <a href="privacidade.html">Política de Privacidade</a>
         <a href="termos.html">Termos de Serviço</a>
     </div>
     <script>
-        // Definição das constantes OAuth
-        const CLIENT_ID = '255597916992-4ra5iqh710g4dparf4m7ob7a30onk6i4.apps.googleusercontent.com';
-        const REDIRECT_URI = 'https://pgama31.github.io/oauth2callback.html';
-        const SCOPE = 'https://www.googleapis.com/auth/calendar https://www.googleapis.com/auth/spreadsheets';
+        // Verificar se o token de acesso está presente no sessionStorage
+        const accessToken = sessionStorage.getItem('access_token');
+        if (accessToken) {
+            console.log('Token de acesso encontrado:', accessToken);
+            // Adicione a lógica para usar o token aqui, por exemplo:
+            // - Fazer chamadas à API usando o token
+            // - Atualizar a UI com informações baseadas no token
+        } else {
+            console.error('Nenhum token de acesso encontrado.');
+        }
 
-        // Função de redirecionamento para a URL de autenticação do Google
+        // Função para redirecionar ao fluxo de login do Google
         function redirectToGoogleAuth() {
-            const authUrl = `https://accounts.google.com/o/oauth2/v2/auth?response_type=code&client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&scope=${SCOPE}&access_type=offline`;
+            const CLIENT_ID = '255597916992-4ra5iqh710g4dparf4m7ob7a30onk6i4.apps.googleusercontent.com';
+            const REDIRECT_URI = 'https://pgama31.github.io/oauth2callback.html';
+            const SCOPE = 'https://www.googleapis.com/auth/calendar https://www.googleapis.com/auth/spreadsheets';
+            const encodedClientId = encodeURIComponent(CLIENT_ID);
+            const encodedRedirectUri = encodeURIComponent(REDIRECT_URI);
+            const encodedScope = encodeURIComponent(SCOPE);
+
+            const authUrl = `https://accounts.google.com/o/oauth2/auth?client_id=${encodedClientId}&redirect_uri=${encodedRedirectUri}&scope=${encodedScope}&response_type=code&access_type=offline&approval_prompt=force`;
+
             window.location.href = authUrl;
         }
 
         // Inicializa a aplicação quando o DOM estiver carregado
         document.addEventListener('DOMContentLoaded', () => {
             const loginButton = document.getElementById('login-button');
-            loginButton.onclick = redirectToGoogleAuth;
+            if (loginButton) {
+                loginButton.onclick = redirectToGoogleAuth;
+            }
         });
     </script>
 </body>
 </html>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LabScheduler - Página Inicial</title>
-</head>
-<body>
-    <h1>Bem-vindo ao LabScheduler</h1>
-    <p>Esta é a página inicial.</p>
-    <script>
-        console.log('Página inicial carregada.');
-
-        // Verificar se o token de acesso está presente no sessionStorage
-        const accessToken = sessionStorage.getItem('access_token');
-        if (accessToken) {
-            console.log('Token de acesso encontrado:', accessToken);
-        } else {
-            console.error('Nenhum token de acesso encontrado.');
-        }
-    </script>
-</body>
-</html>
