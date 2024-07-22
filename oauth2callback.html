@@ -26,19 +26,20 @@
                     grant_type: 'authorization_code',
                 }),
             })
-            .then(response => response.json())
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Falha ao trocar o código pelo token');
+                }
+                return response.json();
+            })
             .then(data => {
                 console.log('Dados recebidos:', data);
 
                 // Armazenar o token de acesso no sessionStorage
-                if (data.access_token) {
-                    sessionStorage.setItem('access_token', data.access_token);
-                } else {
-                    console.error('Erro: Nenhum token de acesso recebido.');
-                }
+                sessionStorage.setItem('access_token', data.access_token);
 
                 // Redirecionar para a página principal do aplicativo ou outra página desejada
-                window.location.href = 'https://pgama31.github.io/index.html'; // Substitua pela sua URL de página principal
+                window.location.href = 'https://pgama31.github.io/index.html';
             })
             .catch(error => {
                 console.error('Erro ao trocar o código pelo token:', error);
@@ -58,3 +59,4 @@
     </script>
 </body>
 </html>
+
