@@ -7,64 +7,46 @@
 </head>
 <body>
     <h1>Bem-vindo ao Aplicativo</h1>
-    <button id="create-event-button">Criar Evento</button>
+    <button id="login-button" style="display: none;">Login</button>
+    <button id="create-event-button" style="display: none;">Criar Evento</button>
+    <button id="logout-button" style="display: none;">Logout</button>
 
     <script>
-        // Verificar se o token está presente no sessionStorage
         const token = sessionStorage.getItem('access_token');
+        const loginButton = document.getElementById('login-button');
+        const createEventButton = document.getElementById('create-event-button');
+        const logoutButton = document.getElementById('logout-button');
+
         if (token) {
             console.log('Token de acesso encontrado:', token);
-
-            // Função para criar um evento no calendário
-            function createCalendarEvent(authToken) {
-                const event = {
-                    summary: 'Sessão de Laboratório',
-                    location: 'Sala de aula',
-                    description: 'Sessão prática para alunos',
-                    start: {
-                        dateTime: '2024-07-21T10:00:00+01:00',
-                        timeZone: 'Europe/Lisbon'
-                    },
-                    end: {
-                        dateTime: '2024-07-21T12:00:00+01:00',
-                        timeZone: 'Europe/Lisbon'
-                    },
-                    recurrence: ['RRULE:FREQ=DAILY;COUNT=2'],
-                    attendees: [{email: 'lpage@example.com'}, {email: 'sbrin@example.com'}],
-                    reminders: {
-                        useDefault: false,
-                        overrides: [
-                            {method: 'email', minutes: 24 * 60},
-                            {method: 'popup', minutes: 10}
-                        ]
-                    }
-                };
-
-                fetch('https://www.googleapis.com/calendar/v3/calendars/primary/events', {
-                    method: 'POST',
-                    headers: {
-                        'Authorization': `Bearer ${authToken}`,
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(event)
-                })
-                .then(response => response.json())
-                .then(data => {
-                    console.log('Evento criado:', data);
-                })
-                .catch(error => {
-                    console.error('Erro ao criar o evento:', error);
-                });
-            }
-
-            // Adiciona um evento ao botão para criar um evento no calendário
-            document.getElementById('create-event-button').addEventListener('click', () => {
-                createCalendarEvent(token);
-            });
-
+            createEventButton.style.display = 'block';
+            logoutButton.style.display = 'block';
         } else {
             console.log('Token de acesso não encontrado.');
+            loginButton.style.display = 'block';
         }
+
+        // Função para criar um evento no calendário
+        function createCalendarEvent(authToken) {
+            // Código existente para criar um evento...
+        }
+
+        // Adiciona um evento ao botão para criar um evento no calendário
+        createEventButton.addEventListener('click', () => {
+            createCalendarEvent(token);
+        });
+
+        // Exemplo de função de login (ajuste conforme sua lógica de autenticação)
+        loginButton.addEventListener('click', () => {
+            // Implemente sua lógica de login aqui...
+            console.log('Login clicado');
+        });
+
+        // Função de logout
+        logoutButton.addEventListener('click', () => {
+            sessionStorage.removeItem('access_token');
+            window.location.reload(); // Recarrega a página para atualizar o estado dos botões
+        });
     </script>
 </body>
 </html>
