@@ -7,11 +7,13 @@
 </head>
 <body>
     <h1>Bem-vindo ao Aplicativo</h1>
-    <button id="login-button" style="display: none;">Login</button>
-    <button id="create-event-button" style="display: none;">Criar Evento</button>
-    <button id="logout-button" style="display: none;">Logout</button>
+    <button id="login-button" aria-label="Login">Login</button>
+    <button id="create-event-button" style="display: none;" aria-label="Criar Evento">Criar Evento</button>
+    <button id="logout-button" style="display: none;" aria-label="Logout">Logout</button>
 
     <script>
+        const CLIENT_ID = '255597916992-4ra5iqh710g4dparf4m7ob7a30onk6i4.apps.googleusercontent.com';
+        const REDIRECT_URI = 'https://pgama31.github.io/oauth2callback.html';
         const token = sessionStorage.getItem('access_token');
         const loginButton = document.getElementById('login-button');
         const createEventButton = document.getElementById('create-event-button');
@@ -21,10 +23,19 @@
             console.log('Token de acesso encontrado:', token);
             createEventButton.style.display = 'block';
             logoutButton.style.display = 'block';
+            loginButton.style.display = 'none'; // Esconde o botão de login se o token existir
         } else {
             console.log('Token de acesso não encontrado.');
             loginButton.style.display = 'block';
         }
+
+        loginButton.addEventListener('click', () => {
+            const scope = 'email';
+            const response_type = 'code';
+            const auth_url = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${CLIENT_ID}&redirect_uri=${encodeURIComponent(REDIRECT_URI)}&scope=${scope}&response_type=${response_type}&access_type=offline`;
+
+            window.location.href = auth_url;
+        });
 
         // Função para criar um evento no calendário
         function createCalendarEvent(authToken) {
@@ -36,12 +47,6 @@
             createCalendarEvent(token);
         });
 
-        // Exemplo de função de login (ajuste conforme sua lógica de autenticação)
-        loginButton.addEventListener('click', () => {
-            // Implemente sua lógica de login aqui...
-            console.log('Login clicado');
-        });
-
         // Função de logout
         logoutButton.addEventListener('click', () => {
             sessionStorage.removeItem('access_token');
@@ -50,5 +55,3 @@
     </script>
 </body>
 </html>
-
-
