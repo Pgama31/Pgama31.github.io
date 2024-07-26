@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Página Inicial</title>
+    <link rel="icon" href="path/to/your/favicon.ico" type="image/x-icon">
 </head>
 <body>
     <h1>Bem-vindo ao Aplicativo</h1>
@@ -11,9 +12,8 @@
     <button id="create-event-button" style="display: none;" aria-label="Criar Evento">Criar Evento</button>
     <button id="logout-button" style="display: none;" aria-label="Logout">Logout</button>
 
+    <script src="app.js"></script>
     <script>
-        const CLIENT_ID = '255597916992-4ra5iqh710g4dparf4m7ob7a30onk6i4.apps.googleusercontent.com';
-        const REDIRECT_URI = 'https://pgama31.github.io/oauth2callback.html';
         const token = sessionStorage.getItem('access_token');
         const loginButton = document.getElementById('login-button');
         const createEventButton = document.getElementById('create-event-button');
@@ -29,19 +29,6 @@
             loginButton.style.display = 'block';
         }
 
-        loginButton.addEventListener('click', () => {
-            const scope = 'email';
-            const response_type = 'code';
-            const auth_url = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${CLIENT_ID}&redirect_uri=${encodeURIComponent(REDIRECT_URI)}&scope=${scope}&response_type=${response_type}&access_type=offline`;
-
-            window.location.href = auth_url;
-        });
-
-        // Função para criar um evento no calendário
-        function createCalendarEvent(authToken) {
-            // Código existente para criar um evento...
-        }
-
         // Adiciona um evento ao botão para criar um evento no calendário
         createEventButton.addEventListener('click', () => {
             createCalendarEvent(token);
@@ -55,4 +42,3 @@
     </script>
 </body>
 </html>
-
