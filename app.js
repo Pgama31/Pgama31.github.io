@@ -1,3 +1,44 @@
+document.addEventListener('DOMContentLoaded', () => {
+    const token = sessionStorage.getItem('access_token');
+    const loginButton = document.getElementById('login-button');
+    const createEventButton = document.getElementById('create-event-button');
+    const logoutButton = document.getElementById('logout-button');
+
+    if (token) {
+        console.log('Token de acesso encontrado:', token);
+        createEventButton.style.display = 'block';
+        logoutButton.style.display = 'block';
+        loginButton.style.display = 'none'; // Esconde o botão de login se o token existir
+    } else {
+        console.log('Token de acesso não encontrado.');
+        loginButton.style.display = 'block';
+    }
+
+    // Adiciona um evento ao botão de login para iniciar o fluxo OAuth
+    loginButton.addEventListener('click', () => {
+        const clientId = '255597916992-4ra5iqh710g4dparf4m7ob7a30onk6i4.apps.googleusercontent.com';
+        const redirectUri = 'https://pgama31.github.io/oauth2callback.html';
+        const scope = 'https://www.googleapis.com/auth/calendar https://www.googleapis.com/auth/spreadsheets';
+        const authUrl = `https://accounts.google.com/o/oauth2/v2/auth?response_type=code&client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scope}`;
+        window.location.href = authUrl;
+    });
+
+    // Adiciona um evento ao botão para criar um evento no calendário
+    createEventButton.addEventListener('click', () => {
+        createCalendarEvent(token);
+    });
+
+    // Função de logout
+    logoutButton.addEventListener('click', () => {
+        sessionStorage.removeItem('access_token');
+        window.location.reload(); // Recarrega a página para atualizar o estado dos botões
+    });
+
+    // Outras funcionalidades do seu app.js
+    // ...
+    // Certifique-se de manter o restante do seu código existente aqui
+});
+
 // Definição das constantes OAuth
 const CLIENT_ID = '255597916992-4ra5iqh710g4dparf4m7ob7a30onk6i4.apps.googleusercontent.com';
 const CLIENT_SECRET = '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';
