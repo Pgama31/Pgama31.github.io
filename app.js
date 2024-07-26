@@ -18,9 +18,14 @@ function redirectToGoogleAuth() {
 // Função para lidar com a resposta de autenticação
 function handleAuthResponse(authResponse) {
     const authToken = authResponse.access_token;
-    // Adicione a lógica para usar o authToken aqui, como criar um evento no calendário
     console.log('Token de acesso:', authToken);
-    createCalendarEvent(authToken);
+
+    // Habilita o botão "Criar Evento" e configura o evento de clique
+    const createEventButton = document.getElementById('create-event-button');
+    if (createEventButton) {
+        createEventButton.disabled = false; // Habilita o botão
+        createEventButton.onclick = function() { createCalendarEvent(authToken); };
+    }
 }
 
 // Função para trocar o código de autorização por um token de acesso
@@ -102,22 +107,6 @@ function initializeApp() {
         loginButton.onclick = redirectToGoogleAuth;
     }
 
-    const urlParams = new URLSearchParams(window.location.search);
-    const code = urlParams.get('code');
-    if (code) {
-        exchangeCodeForToken(code);
-    }
-}
-
-document.addEventListener('DOMContentLoaded', initializeApp);
-
-// Função de inicialização modificada
-function initializeApp() {
-    const loginButton = document.getElementById('login-button');
-    if (loginButton) {
-        loginButton.onclick = redirectToGoogleAuth;
-    }
-
     // Desabilita o botão "Criar Evento" inicialmente
     const createEventButton = document.getElementById('create-event-button');
     if (createEventButton) {
@@ -128,18 +117,9 @@ function initializeApp() {
     const code = urlParams.get('code');
     if (code) {
         exchangeCodeForToken(code);
+    } else {
+        console.error('Token de acesso não encontrado.');
     }
 }
 
-// Modificação na função handleAuthResponse para habilitar o botão "Criar Evento"
-function handleAuthResponse(authResponse) {
-    const authToken = authResponse.access_token;
-    console.log('Token de acesso:', authToken);
-
-    // Habilita o botão "Criar Evento" e configura o evento de clique
-    const createEventButton = document.getElementById('create-event-button');
-    if (createEventButton) {
-        createEventButton.disabled = false; // Habilita o botão
-        createEventButton.onclick = function() { createCalendarEvent(authToken); };
-    }
-}
+document.addEventListener('DOMContentLoaded', initializeApp);
