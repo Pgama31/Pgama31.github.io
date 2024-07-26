@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const clientId = '255597916992-4ra5iqh710g4dparf4m7ob7a30onk6i4.apps.googleusercontent.com';
         const redirectUri = 'https://pgama31.github.io/oauth2callback.html';
         const scope = 'https://www.googleapis.com/auth/calendar https://www.googleapis.com/auth/spreadsheets';
-        const authUrl = `https://accounts.google.com/o/oauth2/v2/auth?response_type=code&client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scope}`;
+        const authUrl = `https://accounts.google.com/o/oauth2/v2/auth?response_type=code&client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scope}&access_type=offline&approval_prompt=force`;
         window.location.href = authUrl;
     });
 
@@ -89,6 +89,7 @@ function exchangeCodeForToken(code) {
     .then(data => {
         console.log('Resposta da troca do token:', data); // Log adicional
         if (data.access_token) {
+            sessionStorage.setItem('access_token', data.access_token); // Armazena o token de acesso no sessionStorage
             handleAuthResponse(data);
         } else {
             console.error('Erro: Nenhum token de acesso recebido.');
