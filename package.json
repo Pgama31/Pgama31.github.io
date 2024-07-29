@@ -1,0 +1,17 @@
+{
+  "name": "pgama31.github.io",
+  "version": "1.0.0",
+  "description": "App- Hidraulica1 Aplicação criada para os alunos se registarem para as sessões de Laboratório, efetuarem o registo dos dados. Todos os dados ficam registados remotamente com possibilidade de acesso a alunos/técnico/docentes.",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.19.2",
+    "google-auth-library": "^9.12.0"
+  }
+}
