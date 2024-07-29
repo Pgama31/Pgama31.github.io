@@ -4,9 +4,9 @@
   "description": "App- Hidraulica1 Aplicação criada para os alunos se registarem para as sessões de Laboratório, efetuarem o registo dos dados. Todos os dados ficam registados remotamente com possibilidade de acesso a alunos/técnico/docentes.",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "start": "node server.js",
+  "test": "echo \"Error: no test specified\" && exit 1"
+},
   "keywords": [],
   "author": "",
   "license": "ISC",
