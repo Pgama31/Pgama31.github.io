@@ -35,8 +35,9 @@
                 if (data.access_token) {
                     // Armazena o token de acesso no sessionStorage
                     sessionStorage.setItem('access_token', data.access_token);
-                    // Redireciona de volta para a página principal
-                    window.location.href = '/index.html';
+                    console.log('Token de acesso armazenado:', data.access_token);
+                    // Redireciona para a página de criação de evento
+                    window.location.href = 'criar-evento.html';
                 } else {
                     console.error('Token de acesso não encontrado na resposta.');
                 }
@@ -48,11 +49,5 @@
             console.error('Código de autorização não encontrado na URL.');
         }
     </script>
-
-    <!-- Incluir os arquivos JavaScript na ordem correta -->
-    <script src="public/auth.js"></script>
-    <script src="public/api.js"></script>
-    <script src="public/app.js"></script>
 </body>
 </html>
-
