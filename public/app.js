@@ -163,22 +163,6 @@ function initializeApp() {
         console.error('Token de acesso não encontrado.');
     }
 }
-// public/app.js
-
-// Função de inicialização da aplicação
-function initializeApp() {
-    const token = getStoredAccessToken();
-    if (token) {
-        console.log('Inicializando aplicação com token de acesso:', token);
-        fetchProtectedResource();
-    } else {
-        console.error('Token de acesso não encontrado. Redirecionando para login.');
-        // Redirecionar para a página de login ou obter um novo token
-        getAccessToken();
-    }
-}
 
 // Chamar a função de inicialização
 initializeApp();
-
-document.addEventListener('DOMContentLoaded', initializeApp);
